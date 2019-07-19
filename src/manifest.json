@@ -20,5 +20,6 @@
       "64": "icons/icon.png"
     },
     "default_title": "Power Lan Clipper"
-  }
+  },
+  "permissions": ["storage", "unlimitedStorage"]
 }
