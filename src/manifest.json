@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["https://de.langenscheidt.com/deutsch-englisch/*"],
-      "js": ["content_script.js"]
+      "js": ["dblclick.js", "content_script.js"]
     }
   ],
   "browser_action": {
