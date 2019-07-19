@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "power-lan-clipper",
+  "description": "Power Lan Clipper",
+  "version": "0.0.1",
+  "icons": {
+    "64": "icons/icon.png"
+  },
+  "background": {
+    "scripts": ["background_script.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://de.langenscheidt.com/deutsch-englisch/*"],
+      "js": ["content_script.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "64": "icons/icon.png"
+    },
+    "default_title": "Power Lan Clipper"
+  }
+}
