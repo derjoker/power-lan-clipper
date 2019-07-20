@@ -12,7 +12,7 @@ if (window.location.search === '') {
     .split(' - ')[0];
   const { origin, pathname } = window.location;
   const link = origin + pathname;
-  const createdAt = Date.now();
+  const now = Date.now();
 
   // example
   const e1 = $('.lemma-example')
@@ -32,12 +32,20 @@ if (window.location.search === '') {
   // console.log(text);
 
   const id = hash(examples);
-  chrome.storage.local.get([id], item => {
-    if (!item.id) {
-      chrome.storage.local.set({
-        [id]: { id, title, link, createdAt, examples, text }
-      });
+  chrome.storage.local.get([id], result => {
+    // console.log(result);
+    let item = result[id];
+    // console.log(item);
+    if (item) {
+      item.visitedAt = now;
+    } else {
+      const createdAt = now;
+      const visitedAt = now;
+      item = { id, title, link, createdAt, visitedAt, examples, text }
     }
+    chrome.storage.local.set({
+      [id]: item
+    });
   });
 }
 
@@ -54,6 +62,8 @@ function extract(element) {
   return [id, { id, front, back }];
 }
 
-// chrome.storage.local.get(null, items => {
+// chrome.storage.local.get(null, result => {
+//   const items = Object.values(result);
 //   console.log(items);
+//   console.log(items.map(item => [item.createdAt, item.visitedAt]));
 // });
