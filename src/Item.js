@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import filter from 'lodash/filter';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,9 +21,14 @@ const useStyles = makeStyles(theme => ({
   table: {
     minWidth: 650,
   },
-  span: {
+  link: {
     marginRight: theme.spacing(1),
   },
+  span: {
+    fontSize: '80%',
+    fontStyle: 'italic',
+    color: 'gray',
+  }
 }));
 
 function ExampleTable({ examples, onToggle }) {
@@ -68,16 +74,16 @@ export default function Item({ item, text, onClick, onDelete, onToggle }) {
   return (
     <div className={classes.root}>
       <div>
-        <Link className={classes.span} href={item.link} target="_blank">
+        <Link className={classes.link} href={item.link} target="_blank">
           {item.title}
         </Link>
-        <Link className={classes.span} component="button" onClick={() => {
+        <Link className={classes.link} component="button" onClick={() => {
           onClick(item.id);
         }}>edit/done</Link>
-        <Link className={classes.span} component="button" onClick={() => {
+        <Link className={classes.link} component="button" onClick={() => {
           onDelete(item.id);
         }}>delete</Link>
-        <span className={classes.span}>{item.createdAt}</span>
+        <span className={classes.span}>{moment(item.createdAt).fromNow()}</span>
       </div>
       <ExampleTable examples={examples} onToggle={onToggle(item.id)} />
     </div>
