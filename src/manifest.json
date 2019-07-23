@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "power-lan-clipper",
   "description": "Power Lan Clipper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "icons": {
     "64": "icons/icon64.png"
   },

@@ -11,42 +11,45 @@ if (window.location.search === '') {
     .text()
     .split(' - ')[0];
   const { origin, pathname } = window.location;
-  const link = origin + pathname;
-  const now = Date.now();
 
-  // example
-  const e1 = $('.lemma-example')
-    .toArray()
-    .map(element => extract(element));
+  if (pathname !== '/deutsch-englisch/') {
+    const link = origin + pathname;
+    const now = Date.now();
 
-  // more example
-  const e2 = $('.example .tab-inner-content .additional-entry')
-    .toArray()
-    .map(element => extract(element));
+    // example
+    const e1 = $('.lemma-example')
+      .toArray()
+      .map(element => extract(element));
 
-  const examples = fromPairs(e1.concat(e2));
+    // more example
+    const e2 = $('.example .tab-inner-content .additional-entry')
+      .toArray()
+      .map(element => extract(element));
 
-  const text = Object.values(examples)
-    .map(example => example.front + ', ' + example.back)
-    .join('; ');
-  // console.log(text);
+    const examples = fromPairs(e1.concat(e2));
 
-  const id = hash(examples);
-  chrome.storage.local.get([id], result => {
-    // console.log(result);
-    let item = result[id];
-    // console.log(item);
-    if (item) {
-      item.visitedAt = now;
-    } else {
-      const createdAt = now;
-      const visitedAt = now;
-      item = { id, title, link, createdAt, visitedAt, examples, text }
-    }
-    chrome.storage.local.set({
-      [id]: item
+    const text = Object.values(examples)
+      .map(example => example.front + ', ' + example.back)
+      .join('; ');
+    // console.log(text);
+
+    const id = hash(examples);
+    chrome.storage.local.get([id], result => {
+      // console.log(result);
+      let item = result[id];
+      // console.log(item);
+      if (item) {
+        item.visitedAt = now;
+      } else {
+        const createdAt = now;
+        const visitedAt = now;
+        item = { id, title, link, createdAt, visitedAt, examples, text }
+      }
+      chrome.storage.local.set({
+        [id]: item
+      });
     });
-  });
+  }
 }
 
 function extract(element) {
