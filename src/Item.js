@@ -46,10 +46,10 @@ function ExampleTable({ examples, onToggle }) {
                 }} />
               </TableCell>
               <TableCell component="th" scope="row">
-                {example.front}
+                {example.back}
               </TableCell>
               <TableCell>
-                {example.back}
+                {example.front}
               </TableCell>
             </TableRow>
           ))}

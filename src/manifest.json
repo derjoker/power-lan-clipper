@@ -24,5 +24,6 @@
     },
     "default_title": "Power Lan Clipper"
   },
-  "permissions": ["downloads", "storage", "unlimitedStorage"]
+  "permissions": ["downloads", "storage", "unlimitedStorage"],
+  "short_name": "Power Lan"
 }
