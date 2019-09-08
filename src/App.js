@@ -86,7 +86,7 @@ class App extends React.Component {
               const selected = flatten(
                 Object.values(items).map(item =>
                   Object.values(item.examples).filter(
-                    example => example.checked
+                    example => example.checked && !example.exported
                   ).map(example => [example.front, example.back])
                 )
               );
@@ -98,6 +98,17 @@ class App extends React.Component {
                   'url': URL.createObjectURL(blob),
                   'filename': 'power-lan.csv'
                 })
+
+                // exported
+                Object.values(items).forEach(item => {
+                  Object.values(item.examples).forEach(example => {
+                    if (example.checked) {
+                      example.exported = true;
+                    }
+                  });
+                });
+                console.log(items);
+                chrome.storage.local.set(items);
               })
             }}
           >
